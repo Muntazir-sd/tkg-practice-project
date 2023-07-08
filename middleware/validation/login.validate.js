@@ -1,6 +1,6 @@
 const Joi = require("joi")
 
-const middleware = Joi.object().keys({
+const login = Joi.object().keys({
     user: Joi.string().min(4).max(15).alphanum().messages({
         "string.min": "User must be at least 4 characters long",
         "string.max": "User must be at most 15 characters long",
@@ -32,8 +32,8 @@ const signup = Joi.object().keys({
     })
 })
 
-exports.middleware = (req, res, next) => {
-    const { error } = middleware.validate(req.body);
+exports.login = (req, res, next) => {
+    const { error } = login.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     next()
 }

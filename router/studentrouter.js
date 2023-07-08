@@ -1,6 +1,7 @@
 const express = require("express");
 const Student = require("../schema/student");
 const { handleAsync } = require('../middleware/error/error');
+const validation = require("../middleware/validation/student.validate");
 const router = express.Router();
 
 router.use(express.json());
@@ -13,17 +14,21 @@ router.route("/")
     res.status(200).json(students);
   }))
 // <--  ***  /api/student/ ***  POST --> 
-  .post(handleAsync(async (req, res) => {
+  .post(validation.student,handleAsync(async (req, res) => {
     // Creating a new student document in the student collection
     const newStudent = await Student.create({
-      NAME: req.body.NAME,
-      DOB: req.body.DOB,
-      ADDRESS: req.body.ADDRESS,
-      STD: req.body.STD,
-      DOA: req.body.DOA,
-      TAGS: req.body.TAGS
+      Firstname: req.body.Firstname,
+      Lastname: req.body.Lastname,
+      Gender: req.body.Gender,
+      DateOfBirth: req.body.DateOfBirth,
+      StudentNO: req.body.StudentNO,
+      Email: req.body.Email,
+      Department: req.body.Department,
+      DateOfAdmission: req.body.DateOfAdmission,
+      phone: req.body.phone,
+      StudentPhoto: req.body.StudentPhoto
     });
-    res.status(200).json(newStudent);
+    res.status(201).json(newStudent);
   }));
 
 router.route("/:id")

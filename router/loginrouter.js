@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { handleAsync } = require('../middleware/error/error');
 const jwtsecret = process.env.jwt
-const validation = require("../middleware/validation");
+const validation = require("../middleware/validation/login.validate");
 const Login = require("../schema/login");
 let router = express.Router();
 
@@ -16,7 +16,7 @@ router.get(("/"), handleAsync(async (req, res) => {
 }));
 
 // <--  ***  /api/login/loginuser *** POST -->
-router.post(("/loginuser"), validation.middleware, handleAsync(async (req, res) => {
+router.post(("/loginuser"), validation.login, handleAsync(async (req, res) => {
     // login route for a new user in login collection
     const { email } = req.body;
     let checkuser = await Login.findOne({ email });

@@ -1,32 +1,49 @@
 const mongoose = require("mongoose");
-const studentSchema = new mongoose.Schema({ 
-    NAME: {
+const studentSchema = new mongoose.Schema({
+    Firstname: {
         type: String,
         required: true,
         max: 100
     },
-    DOB: {
-        type: Date,
-        required: true
-    },
-    ADDRESS: {
+    Lastname: {
         type: String,
         required: true
     },
-    STD: {
+    Gender: {
         type: String,
         required: true
     },
-    DOA: {
+    DateOfBirth: {
         type: Date,
         default: "today",
         required: true
     },
-    TAGS: {
-        type: [String],
+    StudentNO: {
+        type: Number,
+        required: true,
+        unique:true
+    },
+    Email:{
+        type:String,
+        required:true   
+    },
+    Department: {
+        type: String,
         required: true
+    },
+    DateOfAdmission: {
+        type: Date,
+        default: "today",
+        required: true
+    },
+    phone: {
+        type: Number,
+        required: true
+    },
+    StudentPhoto:{
+        type:String,
     }
-},{
+}, {
     timestamps: true
 })
 
